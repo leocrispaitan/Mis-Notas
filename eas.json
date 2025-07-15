@@ -1,0 +1,87 @@
+import React from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, FlatList } from 'react-native';
+
+const categories = [
+  { key: '1', label: 'cursos', icon: require('./assets/images/logo.png') },
+  { key: '2', label: 'notas', icon: require('./assets/images/logo.png') },
+  { key: '3', label: 'promedio', icon: require('./assets/images/logo.png') },
+  { key: '4', label: 'calendario', icon: require('./assets/images/logo.png') },
+  { key: '5', label: 'horario', icon: require('./assets/images/logo.png') },
+  { key: '6', label: 'ver todo', icon: require('./assets/images/logo.png') },
+];
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.menuButton}>
+          <Image source={require('./assets/images/menu.png')} style={styles.menuIcon} />
+        </TouchableOpacity>
+        <View style={styles.profileContainer}>
+          <Image source={require('./assets/images/profile.jpg')} style={styles.profilePic} />
+          <View>
+            <Text style={styles.hola}>Hola!</Text>
+            <Text style={styles.name}>MORGAN MAXWELL</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.bellButton}>
+          <Image source={require('./assets/images/campana.png')} style={styles.bellIcon} />
+        </TouchableOpacity>
+      </View>
+
+      {/* Search */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search workout, program, trainers, etc"
+          placeholderTextColor="#aaa"
+        />
+        <Image source={require('./assets/images/search.png')} style={styles.searchIcon} />
+      </View>
+
+      {/* Categorías */}
+      <View style={styles.categoriesHeader}>
+        <Text style={styles.categorias}>Categorias</Text>
+        <Text style={styles.showAll}>Show All</Text>
+      </View>
+
+      {/* Grid */}
+      <FlatList
+        data={categories}
+        numColumns={3}
+        renderItem={({ item }) => (
+          <View style={styles.categoryBox}>
+            <Image source={item.icon} style={styles.categoryIcon} />
+            <Text style={styles.categoryLabel}>{item.label}</Text>
+          </View>
+        )}
+        keyExtractor={item => item.key}
+        contentContainerStyle={styles.grid}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#181515', padding: 20 },
+  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
+  menuButton: { marginRight: 10 },
+  menuIcon: { width: 40, height: 40 },
+  profileContainer: { flexDirection: 'row', alignItems: 'center', flex: 1 },
+  profilePic: { width: 50, height: 50, borderRadius: 25, marginRight: 10 },
+  hola: { color: '#fff', fontSize: 16 },
+  name: { color: '#4EFF6A', fontSize: 18, fontWeight: 'bold' },
+  bellButton: { marginLeft: 10 },
+  bellIcon: { width: 40, height: 40 },
+  searchContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#333', borderRadius: 15, paddingHorizontal: 15, marginBottom: 30 },
+  searchInput: { flex: 1, color: '#fff', height: 50 },
+  searchIcon: { width: 25, height: 25, tintColor: '#aaa' },
+  categoriesHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
+  categorias: { color: '#fff', fontSize: 28, fontWeight: 'bold' },
+  showAll: { color: '#fff', fontSize: 24, fontWeight: 'bold' },
+  grid: { alignItems: 'center' },
+  categoryBox: { backgroundColor: '#fff', borderRadius: 20, width: 110, height: 110, justifyContent: 'center', alignItems: 'center', margin: 10 },
+  categoryIcon: { width: 50, height: 50, marginBottom: 10 },
+  categoryLabel: { color: '#181515', fontSize: 18, fontWeight: '500' },
+});
