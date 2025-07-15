@@ -1,29 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, useColorScheme } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './SplashScreen';
-import HomeScreen from './HomeScreen';
+import LoginScreen from './LoginScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
-  const colorScheme = useColorScheme();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2000); // 2 segundos
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (showSplash) {
-    return <SplashScreen colorScheme={colorScheme} />;
-  }
-
   return (
-    <View style={{ flex: 1 }}>
-      <HomeScreen />
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
