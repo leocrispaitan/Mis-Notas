@@ -6,7 +6,7 @@ const SplashScreen = ({ colorScheme }) => {
   return (
     <View style={[styles.container, { backgroundColor: isDark ? '#111' : '#fff' }] }>
       <Image source={require('./assets/images/logo.png')} style={styles.logo} />
-      <Text style={[styles.text, { color: isDark ? '#fff' : '#333' }]}>Hola bienvenido a mi app</Text>
+      <Text style={[styles.text, { color: isDark ? '#fff' : '#333' }]}>Hola bienvenido bot</Text>
     </View>
   );
 };
